@@ -1,6 +1,10 @@
-<?php include "./controllers/BookController.php";
+<?php 
+session_start();
+include "./controllers/BookController.php";
+include "./controllers/AuthorController.php";
 
-
+$authors = AuthorController::index();
+$books = BookController::index();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
@@ -33,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if(isset($_GET['edit'])){
         $book = BookController::show();
     }
+    if(isset($_GET['sort'])){
+        $books = BookController::sortFilter();
+    }
 
     // atvaizduosim knygą
 
@@ -43,4 +50,3 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 
 //paimti visas knygas
-$books = BookController::index();

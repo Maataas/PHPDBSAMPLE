@@ -11,7 +11,18 @@
     </div>
     <div class="form-group">
         <label for="exampleInputEmail1">Autoriaus id (laikina)</label>
-        <input type="number" class="form-control" name="author_id" value="<?= (isset($_GET['edit'])) ? $book->authorId : "" ?>">
+        <select class="form-select" name="authorId">
+            <?php foreach ($authors as $author) {
+                $seleced = "";
+                if (isset($book) && $book->authorId == $author->id) {
+                    $seleced = "selected";
+                }
+
+                echo '   <option value="' . $author->id . '" ' . $seleced . '  >' . $author->name . ' ' . $author->surname . '</option>';
+            }
+            ?>
+        </select>
+        <!-- <input type="number" class="form-control" name="author_id" value="<?= (isset($_GET['edit'])) ? $book->authorId : "" ?>"> -->
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <?php if (isset($_GET['edit'])) { ?>
